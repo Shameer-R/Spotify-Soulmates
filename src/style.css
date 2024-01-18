@@ -1,0 +1,30 @@
+body {
+    background: rgb(0,196,255);
+    background: linear-gradient(90deg, rgba(0,196,255,1) 0%, rgba(154,0,186,1) 100%); 
+}
+
+.center-section {
+    display: flex;
+    gap: 15rem;
+    align-items: center;
+    justify-content: center;
+    height: 65%;
+}
+
+.center-section > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 25%;
+    height: 50%;
+}
+
+.center-section>div>button {
+    width: 5rem;
+    text-align: center;
+    margin-top: 1rem;
+}
