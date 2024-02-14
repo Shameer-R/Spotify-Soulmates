@@ -1,5 +1,5 @@
 {
-  "name": "spotify-user-compatibility-checker",
+  "name": "Spotify-Soulmates",
   "version": "1.0.0",
   "description": "This web app checks the compatibility of two users based on their music tastes on Spotify",
   "main": "src/index.js",
