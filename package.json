@@ -1,0 +1,14 @@
+{
+  "name": "spotify-user-compatibility-checker",
+  "version": "1.0.0",
+  "description": "This web app checks the compatibility of two users based on their music tastes on Spotify",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.4"
+  }
+}
