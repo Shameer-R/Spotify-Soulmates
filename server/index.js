@@ -16,11 +16,21 @@ var authOptions = {
     json: true
 };
 
-request.post(authOptions, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-        var token = body.access_token;
-        console.log(token);
-    } else {
-        console.log(response.statusCode);
-    }
-});
+function getAccessToken() {
+    return new Promise((resolve, reject) => {
+        request.post(authOptions, function(error, response, body) {
+            if (!error && response.statusCode === 200) {
+                resolve(body.access_token);
+            } else {
+                reject(response.statusCode);
+            }
+        }); 
+    }); 
+}
+
+async function Main() {
+    const access_token = await getAccessToken();
+    console.log(access_token);
+}
+
+Main();
