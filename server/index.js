@@ -41,9 +41,13 @@ async function getPlaylistTracks(playlistID, access_token) {
 
     let playlistResponse = await playlistData.json();
 
+    let playlistIDList = []
+
     for (var i = 0; i < playlistResponse.tracks.items.length; i++) { 
-        console.log(playlistResponse.tracks.items[i].track.id);
+        playlistIDList.push(playlistResponse.tracks.items[i].track.id)
     }
+
+    return playlistIDList
 }
 
 async function getUserInfo(user_1_ID, user_2_ID, access_token) {
@@ -66,23 +70,43 @@ async function getUserInfo(user_1_ID, user_2_ID, access_token) {
     });
 
     let userResponse_1 = await userData_1.json();
-    let userResponse_2 = await userData_2.json();
+    console.log("User 1 Response")
 
-    // Get ID'S for all playlists
+    let userResponse_2 = await userData_2.json();
+    console.log("User 2 Response")
+
+    // Get ID'S for all playlists and plug them into their respective lists
+
+    let userTracks_1 = []
+    let userTracks_2 = []
+
     for (var i = 0; i < userResponse_1.items.length; i++) { 
-        await getPlaylistTracks(userResponse_1.items[i].id, access_token);
+        let Result = await getPlaylistTracks(userResponse_1.items[i].id, access_token);
+        for (var trackIndex = 0; trackIndex < Result.length; trackIndex++) {
+            userTracks_1.push(Result[trackIndex])
+        }
     }
+
+    console.log("Got user 1 tracks")
 
     for (var i = 0; i < userResponse_2.items.length; i++) { 
-        await getPlaylistTracks(userResponse_2.items[i].id, access_token);
+        let Result = await getPlaylistTracks(userResponse_2.items[i].id, access_token);
+        for (var trackIndex = 0; trackIndex < Result.length; trackIndex++) {
+            userTracks_2.push(Result[trackIndex])
+        }
     }
+
+    console.log("Got user 2 tracks")
+
+    console.log(userTracks_1.length)
+    console.log(userTracks_2.length)
 
 }
 
 async function Main() {
     const access_token = await getAccessToken();
     const user_1_ID = "l5x74zkz5jru3g2v6od993am5";
-    const user_2_ID = "l5x74zkz5jru3g2v6od993am5"
+    const user_2_ID = "6co46gz7qw27jo9wqp3imde8g"
 
     getUserInfo(user_1_ID, user_2_ID, access_token);
 }
