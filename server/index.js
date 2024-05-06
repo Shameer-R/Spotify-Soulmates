@@ -50,6 +50,24 @@ async function getPlaylistTracks(playlistID, access_token) {
     return playlistIDList
 }
 
+function findMatchingObjects(list_1, list_2) {
+
+    let matchingObjects = []
+
+    for (var item_1 = 0; item_1 < list_1.length; item_1++) {
+
+        for (var item_2 = 0; item_2 < list_2.length; list_2++) {
+            if (list_1[item_1] == list_2[item_2]) {
+                matchingObjects.push(list_1[item_1])
+            }
+        }
+
+    }
+
+    return matchingObjects
+
+}
+
 async function getUserInfo(user_1_ID, user_2_ID, access_token) {
 
     let getUserPlaylistUrl_1 = `https://api.spotify.com/v1/users/${user_1_ID}/playlists`;
@@ -98,9 +116,9 @@ async function getUserInfo(user_1_ID, user_2_ID, access_token) {
 
     console.log("Got user 2 tracks")
 
-    console.log(userTracks_1.length)
-    console.log(userTracks_2.length)
+    let matchingObjects = findMatchingObjects(userTracks_1, userTracks_2)
 
+    console.log(matchingObjects.length)
 }
 
 async function Main() {
