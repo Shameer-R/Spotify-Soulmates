@@ -41,36 +41,50 @@ async function getPlaylistTracks(playlistID, access_token) {
 
     let playlistResponse = await playlistData.json();
 
-    
-
     for (var i = 0; i < playlistResponse.tracks.items.length; i++) { 
-        console.log(playlistResponse.tracks.items[i].track.name);
+        console.log(playlistResponse.tracks.items[i].track.id);
     }
 }
 
-async function getUserInfo(userID, access_token) {
-    let getUserPlaylistUrl = `https://api.spotify.com/v1/users/${userID}/playlists`;
+async function getUserInfo(user_1_ID, user_2_ID, access_token) {
 
-    let userData = await fetch(getUserPlaylistUrl, {
+    let getUserPlaylistUrl_1 = `https://api.spotify.com/v1/users/${user_1_ID}/playlists`;
+    let getUserPlaylistUrl_2 = `https://api.spotify.com/v1/users/${user_2_ID}/playlists`;
+
+    let userData_1 = await fetch(getUserPlaylistUrl_1, {
         method: 'GET',
         headers: {
             Authorization: 'Bearer ' + access_token
         }
     });
 
-    let userResponse = await userData.json();
+    let userData_2 = await fetch(getUserPlaylistUrl_2, {
+        method: 'GET',
+        headers: {
+            Authorization: 'Bearer ' + access_token
+        }
+    });
+
+    let userResponse_1 = await userData_1.json();
+    let userResponse_2 = await userData_2.json();
 
     // Get ID'S for all playlists
-    for (var i = 0; i < userResponse.items.length; i++) { 
-        await getPlaylistTracks(userResponse.items[i].id, access_token);
+    for (var i = 0; i < userResponse_1.items.length; i++) { 
+        await getPlaylistTracks(userResponse_1.items[i].id, access_token);
+    }
+
+    for (var i = 0; i < userResponse_2.items.length; i++) { 
+        await getPlaylistTracks(userResponse_2.items[i].id, access_token);
     }
 
 }
 
 async function Main() {
     const access_token = await getAccessToken();
+    const user_1_ID = "l5x74zkz5jru3g2v6od993am5";
+    const user_2_ID = "l5x74zkz5jru3g2v6od993am5"
 
-    getUserInfo("l5x74zkz5jru3g2v6od993am5", access_token);
+    getUserInfo(user_1_ID, user_2_ID, access_token);
 }
 
 Main();
