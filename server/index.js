@@ -56,7 +56,7 @@ function findMatchingObjects(list_1, list_2) {
 
     for (var item_1 = 0; item_1 < list_1.length; item_1++) {
 
-        for (var item_2 = 0; item_2 < list_2.length; list_2++) {
+        for (var item_2 = 0; item_2 < list_2.length; item_2++) {
             if (list_1[item_1] == list_2[item_2]) {
                 matchingObjects.push(list_1[item_1])
             }
@@ -118,13 +118,13 @@ async function getUserInfo(user_1_ID, user_2_ID, access_token) {
 
     let matchingObjects = findMatchingObjects(userTracks_1, userTracks_2)
 
-    console.log(matchingObjects.length)
+    console.log("You guys are " + matchingObjects.length + "% compatible!");
 }
 
 async function Main() {
     const access_token = await getAccessToken();
-    const user_1_ID = "l5x74zkz5jru3g2v6od993am5";
-    const user_2_ID = "6co46gz7qw27jo9wqp3imde8g"
+    const user_1_ID = "ql82ypqt1eu3s898agod9ehqy";
+    const user_2_ID = "ql82ypqt1eu3s898agod9ehqy";
 
     getUserInfo(user_1_ID, user_2_ID, access_token);
 }
