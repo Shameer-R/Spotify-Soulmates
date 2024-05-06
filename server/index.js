@@ -28,9 +28,27 @@ function getAccessToken() {
     }); 
 }
 
+async function getUserInfo(userID, access_token) {
+    let getUserPlaylistUrl = `https://api.spotify.com/v1/users/${userID}/playlists`;
+
+    let userData = await fetch(getUserPlaylistUrl, {
+        method: 'GET',
+        headers: {
+            Authorization: 'Bearer ' + access_token
+        }
+    });
+
+    let userResponse = await userData.json();
+
+    console.log(userResponse);
+
+
+}
+
 async function Main() {
     const access_token = await getAccessToken();
-    console.log(access_token);
+
+    getUserInfo("l5x74zkz5jru3g2v6od993am5", access_token);
 }
 
 Main();
