@@ -28,6 +28,26 @@ function getAccessToken() {
     }); 
 }
 
+async function getPlaylistTracks(playlistID, access_token) {
+
+    let getTracksUrl = `https://api.spotify.com/v1/playlists/${playlistID}`;
+
+    let playlistData = await fetch(getTracksUrl, {
+        method: 'GET',
+        headers: {
+            Authorization: 'Bearer ' + access_token
+        }
+    });
+
+    let playlistResponse = await playlistData.json();
+
+    
+
+    for (var i = 0; i < playlistResponse.tracks.items.length; i++) { 
+        console.log(playlistResponse.tracks.items[i].track.name);
+    }
+}
+
 async function getUserInfo(userID, access_token) {
     let getUserPlaylistUrl = `https://api.spotify.com/v1/users/${userID}/playlists`;
 
@@ -40,11 +60,10 @@ async function getUserInfo(userID, access_token) {
 
     let userResponse = await userData.json();
 
-    for (var i = 0; i < userResponse.items.length; i++) {
-        console.log(userResponse.items[i].id);
+    // Get ID'S for all playlists
+    for (var i = 0; i < userResponse.items.length; i++) { 
+        await getPlaylistTracks(userResponse.items[i].id, access_token);
     }
-
-    
 
 }
 
