@@ -40,8 +40,11 @@ async function getUserInfo(userID, access_token) {
 
     let userResponse = await userData.json();
 
-    console.log(userResponse);
+    for (var i = 0; i < userResponse.items.length; i++) {
+        console.log(userResponse.items[i].id);
+    }
 
+    
 
 }
 
