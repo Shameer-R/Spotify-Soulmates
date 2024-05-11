@@ -143,9 +143,9 @@ app.get('/compatibility/:userID1/:userID2', async (req, res) => {
         const user_1_ID = req.params.userID1
         const user_2_ID = req.params.userID2
 
-        const compatability = getUserInfo(user_1_ID, user_2_ID, access_token)
+        const compatability = await getUserInfo(user_1_ID, user_2_ID, access_token)
 
-        res.send("Compatability: " + compatability);
+        res.json({Compatability: compatability});
     } catch (error) {
         res.send("Error getting compatability")
     }
