@@ -1,7 +1,10 @@
 require("dotenv").config({path: "./.env"});
+cors = require('cors');
 var request = require("request");
 const app = require("express")();
 const port = 3000;
+
+app.use(cors());
 
 
 const client_id = process.env.ClientID;
