@@ -11,7 +11,7 @@ submitButton.addEventListener("click", async () => {
 
     try {
         fetch(url)
-        .then(response => response.json)
+        .then(response => response.json())
         .then(data => {
             console.log(data)
         })
