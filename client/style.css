@@ -32,3 +32,8 @@ button {
     border: none;
 }
 
+#Result {
+    width: 100%;
+    text-align: center;
+    color: white;
+}
