@@ -49,7 +49,9 @@ async function getPlaylistTracks(playlistID, access_token) {
     let playlistIDList = []
 
     for (var i = 0; i < playlistResponse.tracks.items.length; i++) { 
-        playlistIDList.push(playlistResponse.tracks.items[i].track.id)
+        if (playlistResponse.tracks.items[i].track != null) {
+            playlistIDList.push(playlistResponse.tracks.items[i].track.id)
+        }
     }
 
     return playlistIDList
@@ -128,13 +130,13 @@ async function getUserInfo(user_1_ID, user_2_ID, access_token) {
     return matchingObjects.length;
 }
 
-// async function Main() {
-//     const access_token = await getAccessToken();
-//     const user_1_ID = "ql82ypqt1eu3s898agod9ehqy";
-//     const user_2_ID = "ql82ypqt1eu3s898agod9ehqy";
+async function Main() {
+    const access_token = await getAccessToken();
+    const user_1_ID = "l5x74zkz5jru3g2v6od993am5";
+    const user_2_ID = "l5x74zkz5jru3g2v6od993am5";
 
-//     const compatabilityLength = getUserInfo(user_1_ID, user_2_ID, access_token);
-// }
+    const compatabilityLength = getUserInfo(user_1_ID, user_2_ID, access_token);
+}
 
 app.get('/compatibility/:userID1/:userID2', async (req, res) => {
     try {
@@ -154,3 +156,5 @@ app.get('/compatibility/:userID1/:userID2', async (req, res) => {
 app.listen(port, () => {
     console.log("Server is running on port " + port);
 })
+
+Main()
